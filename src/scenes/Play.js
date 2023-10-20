@@ -72,16 +72,23 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, "Press (R) to Restart or ← for Menu", scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        //adding music
+        this.music01 = this.sound.add("music_main01",{volume:0.5}); //add. note: let didn't work, because the scope didn't reach update()
+        this.music01.setLoop(true); //loop
+        this.music01.play(); //play
     }
 
     update() {
         // check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
+            this.music01.stop();
             this.scene.restart();
         }
 
         // check key input for menu
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)){
+            this.music01.stop();
             this.scene.start("menuScene");
         }
 

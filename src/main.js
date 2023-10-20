@@ -1,3 +1,6 @@
+//1)    Add your own (copyright-free) looping background music to the Play scene
+//      (keep the volume low and be sure that multiple instances of your music don't play when the game restarts) (1)
+
 let config = {
     type: Phaser.AUTO,
     width: 640,

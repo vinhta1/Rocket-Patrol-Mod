@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         this.load.audio("sfx_select", "./assets/audio/blip_select12.wav");
         this.load.audio("sfx_explosion", "./assets/audio/explosion38.wav");
         this.load.audio("sfx_rocket", "./assets/audio/rocket_shot.wav");
+        this.load.audio("music_main01", "./assets/audio/RocketPatrol.wav");
     }
 
     create() {
@@ -35,6 +36,8 @@ class Menu extends Phaser.Scene {
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+        
     }
 
     update() {
