@@ -6,6 +6,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         scene.add.existing(this); // add to exisitng scene
         this.points = pointValue;
         this.moveSpeed = game.settings.spaceshipSpeed;
+        scene.physics.add.existing(this); //https://stackoverflow.com/questions/55302007/how-add-physics-to-phaser-3-sprite
     }
 
     update() {
