@@ -37,7 +37,7 @@ class Play extends Phaser.Scene {
 
         // add rocket(p1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, "rocket").setOrigin(0.5,0);
-        this.p1Rocket.body.setCollideWorldBounds(true, 1); //adding walls + bounce
+        this.p1Rocket.body.setCollideWorldBounds(true); //adding walls + (removed) bounce
 
 
         // define keys
@@ -95,6 +95,7 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, "Press (R) to Restart or ← for Menu", scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            this.p1Rocket.body.setVelocity(0,0);
         }, null, this);
 
         
