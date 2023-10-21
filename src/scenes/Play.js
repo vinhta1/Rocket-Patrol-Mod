@@ -83,7 +83,7 @@ class Play extends Phaser.Scene {
         }, null, this);
 
         //adding music
-        this.music01 = this.sound.add("music_main01",{volume:0.5}); //add. note: let didn't work, because the scope didn't reach update()
+        this.music01 = this.sound.add("music_main01",{volume:0.4}); //add. note: let didn't work, because the scope didn't reach update()
         this.music01.setLoop(true); //loop
         this.music01.play(); //play
     }
