@@ -45,7 +45,15 @@ class Play extends Phaser.Scene {
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, "spaceship", 0, 30).setOrigin(0, 0); //top ship
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, "spaceship", 0, 20).setOrigin(0,0); //middle ship
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, "spaceship", 0, 10).setOrigin(0, 0); //bottom ship
-    
+
+        //halftime speed up
+        this.clockHalf = this.time.delayedCall(game.settings.gameTimer/2, () => {
+            this.ship01.moveSpeed += 2;
+            this.ship02.moveSpeed += 2;
+            this.ship03.moveSpeed += 2;
+        }, null, this);
+
+
         // animation config
         this.anims.create({
             key: "explode",
@@ -74,13 +82,17 @@ class Play extends Phaser.Scene {
         // GAME OVER flag
         this.gameOver = false;
 
-        // 60-second play clock
+        
+
+        // 60 or 45-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, "Press (R) to Restart or ← for Menu", scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        
 
         //adding music
         this.music01 = this.sound.add("music_main01",{volume:0.4}); //add. note: let didn't work, because the scope didn't reach update()
