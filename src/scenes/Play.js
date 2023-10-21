@@ -8,6 +8,15 @@ class Play extends Phaser.Scene {
         this.load.image("rocket", "./assets/images/rocket.png");
         this.load.image("spaceship", "./assets/images/spaceship.png");
         this.load.image("starfield", "./assets/images/starfield.png");
+        this.load.image("explodeParticle","assets/images/explodeParticle.png");
+        this.particleConfig = {
+            speed: 400,
+            lifespan: 1000,
+            gravityY: 200,
+            duration: 100,
+            quantity: 2,
+            rotate: Phaser.Math.Between(0,359)
+        }
         this.load.spritesheet("explosion", "./assets/images/explosion.png", {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
 
@@ -103,15 +112,18 @@ class Play extends Phaser.Scene {
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)){
             this.p1Rocket.reset();
-            this.shipExplode(this.ship03)
+            this.shipExplode(this.ship03);
+            this.add.particles(this.ship03.x,this.ship03.y,"explodeParticle",this.particleConfig);
         }
         if(this.checkCollision(this.p1Rocket, this.ship02)){
             this.p1Rocket.reset();
-            this.shipExplode(this.ship02)
+            this.shipExplode(this.ship02);
+            this.add.particles(this.ship02.x,this.ship02.y,"explodeParticle",this.particleConfig);
         }
         if(this.checkCollision(this.p1Rocket, this.ship01)){
             this.p1Rocket.reset();
-            this.shipExplode(this.ship01)
+            this.shipExplode(this.ship01);
+            this.add.particles(this.ship01.x,this.ship01.y,"explodeParticle",this.particleConfig);
         }
     }
 
