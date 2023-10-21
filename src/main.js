@@ -8,6 +8,7 @@
 // 1)    Add your own (copyright-free) looping background music to the Play scene
 //      (keep the volume low and be sure that multiple instances of your music don't play when the game restarts) (1)
 // 2)   Use Phaser's particle emitter to create a particle explosion when the rocket hits the spaceship (5)
+// 3)   Implement the speed increase that happens after 30 seconds in the original game (1)
 
 let config = {
     type: Phaser.AUTO,
