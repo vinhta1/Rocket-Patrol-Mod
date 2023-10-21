@@ -36,7 +36,7 @@ class Play extends Phaser.Scene {
         this.physics.world.setBounds(borderUISize, 0, game.config.width - 2 * (borderUISize), game.config.height, true, true, false, false);
 
         // add rocket(p1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, "rocket").setOrigin(0.5,0);
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, "rocket", 0, mouse).setOrigin(0.5,0);
         this.p1Rocket.body.setCollideWorldBounds(true, 1); //adding walls + bounce
 
 

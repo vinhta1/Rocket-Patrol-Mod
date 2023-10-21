@@ -9,6 +9,7 @@
 //      (keep the volume low and be sure that multiple instances of your music don't play when the game restarts) (1)
 // 2)   Use Phaser's particle emitter to create a particle explosion when the rocket hits the spaceship (5)
 // 3)   Implement the speed increase that happens after 30 seconds in the original game (1)
+// 4)   Implement mouse control for player movement and mouse click to fire (5)
 
 let config = {
     type: Phaser.AUTO,
@@ -34,3 +35,4 @@ let borderPadding = borderUISize / 3;
 
 // reserve keyboard vars
 let keyF, keyR, keyLEFT, keyRIGHT;
+let mouse =  false;
