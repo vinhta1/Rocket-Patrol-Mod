@@ -36,8 +36,8 @@ class Play extends Phaser.Scene {
         this.physics.world.setBounds(borderUISize, 0, game.config.width - 2 * (borderUISize), game.config.height, true, true, false, false);
 
         // add rocket(p1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, "rocket", 0, mouse).setOrigin(0.5,0);
-        this.p1Rocket.body.setCollideWorldBounds(true, 1); //adding walls + bounce
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, "rocket").setOrigin(0.5,0);
+        this.p1Rocket.body.setCollideWorldBounds(true); //adding walls + (removed) bounce
 
 
         // define keys
@@ -95,6 +95,7 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, "Press (R) to Restart or ← for Menu", scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            this.p1Rocket.body.setVelocity(0,0);
         }, null, this);
 
         
@@ -103,6 +104,20 @@ class Play extends Phaser.Scene {
         this.music01 = this.sound.add("music_main01",{volume:0.4}); //add. note: let didn't work, because the scope didn't reach update()
         this.music01.setLoop(true); //loop
         this.music01.play(); //play
+
+        this.input.on('pointerdown', pointer => //all input.ons MUST BE IN CREATE FOR THE LOVE OF GOD
+                {
+                    if(this.gameOver) {
+                        if (pointer.leftButtonDown()){
+                            this.music01.stop();
+                            this.scene.start("menuScene");
+                        }
+                        else if (pointer.rightButtonDown()){
+                            this.music01.stop();
+                            this.scene.restart();
+                        }
+                    }
+                }, this);
     }
 
     update() {
@@ -118,19 +133,20 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
 
-        if(this.gameOver) {
-            this.input.once('pointerdown', function (pointer)
-                {
-                    if (pointer.leftButtonDown()){
-                        this.music01.stop();
-                        this.scene.start("menuScene");
-                    }
-                    else if (pointer.rightButtonDown()){
-                        this.music01.stop();
-                        this.scene.restart();
-                    }
-                }, this);
-        }
+        // fires like 36 times
+        // if(this.gameOver) {
+        //     this.input.once('pointerdown', pointer => 
+        //         {
+        //             if (pointer.leftButtonDown()){
+        //                 this.music01.stop();
+        //                 this.scene.start("menuScene");
+        //             }
+        //             else if (pointer.rightButtonDown()){
+        //                 this.music01.stop();
+        //                 this.scene.restart();
+        //             }
+        //         }, this);
+        // }
 
         this.starfield.tilePositionX -= 4;
         if(!this.gameOver){
