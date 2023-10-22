@@ -91,7 +91,7 @@ class Play extends Phaser.Scene {
 
         // 60 or 45-second play clock
         scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(1000, () => {
+        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, "GAME OVER", scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, "Press (R) to Restart or ← for Menu", scoreConfig).setOrigin(0.5);
             this.gameOver = true;
@@ -105,8 +105,10 @@ class Play extends Phaser.Scene {
         this.music01.setLoop(true); //loop
         this.music01.play(); //play
 
-        this.input.on('pointerdown', pointer => //all input.ons MUST BE IN CREATE FOR THE LOVE OF GOD
+        this.input.on("pointerdown", pointer => //all input.ons MUST BE IN CREATE FOR THE LOVE OF GOD
                 {
+                    mouse = true;
+                    // if (mouse) {
                     if(this.gameOver) {
                         if (pointer.leftButtonDown()){
                             this.music01.stop();
@@ -117,18 +119,30 @@ class Play extends Phaser.Scene {
                             this.scene.restart();
                         }
                     }
+
+                    if (!this.p1Rocket.isFiring) {
+                        this.p1Rocket.fire();
+                    }
+                    // }
+                }, this);
+
+                this.input.on("pointermove", () =>
+                {
+                    mouse = true;
                 }, this);
     }
 
     update() {
         // check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
+            mouse = false;
             this.music01.stop();
             this.scene.restart();
         }
 
         // check key input for menu
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)){
+            mouse = false;
             this.music01.stop();
             this.scene.start("menuScene");
         }

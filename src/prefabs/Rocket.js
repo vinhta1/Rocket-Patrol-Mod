@@ -10,14 +10,16 @@ class Rocket extends Phaser.GameObjects.Sprite {
         scene.physics.add.existing(this); //https://stackoverflow.com/questions/55302007/how-add-physics-to-phaser-3-sprite
         this.setInteractive();
         // https://labs.phaser.io/edit.html?src=src/input/mouse/mouse%20down.js&v=3.60.0
-        if (mouse){
-            scene.input.on('pointerdown', function (pointer)
-            {
-                if (!this.isFiring) {
-                    this.fire();
-                }
-            }, this);
-        }
+        
+        //this doesn't work here for some reason (two input.on = bad?)
+        // if (mouse){
+        //     scene.input.on('pointerdown', pointer =>
+        //     {
+        //         if (!this.isFiring) {
+        //             this.fire();
+        //         }
+        //     }, this);
+        // }
 
     }
     
@@ -39,20 +41,23 @@ class Rocket extends Phaser.GameObjects.Sprite {
         // mouse fire button
 
         // keyboard controls
-        if (!mouse){ //disable if mouse mode is on
-            if(keyLEFT.isDown){
-                //this.player.x -= this.PLAYER_VELOCITY;
-                playerVector.x = -1
-            } else if(keyRIGHT.isDown){
-                //this.player.x += this.PLAYER_VELOCITY;
-                playerVector.x = 1
-            };
+        //if (!mouse){ //disable if mouse mode is on
+        if(keyLEFT.isDown){
+            mouse = false;
+            //this.player.x -= this.PLAYER_VELOCITY;
+            playerVector.x = -1
+        } else if(keyRIGHT.isDown){
+            mouse = false;
+            //this.player.x += this.PLAYER_VELOCITY;
+            playerVector.x = 1
+        };
 
-            // keyboard fire button
-            if (Phaser.Input.Keyboard.JustDown(keyF) && !this.isFiring) {
-                this.fire();
-            }
+        // keyboard fire button
+        if (Phaser.Input.Keyboard.JustDown(keyF) && !this.isFiring) {
+            mouse = false;
+            this.fire();
         }
+        //}
         
         if (!this.isFiring){
         this.body.setVelocity(this.moveSpeed * 50 * playerVector.x, 0); //move but better
@@ -84,6 +89,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
     }
 
     fire() {
+        this.body.setVelocityX(0); //to remove angled shots
         this.isFiring = true;
         this.sfxRocket.play(); // sound in prefab, play once
     }

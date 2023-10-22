@@ -52,9 +52,11 @@ class Menu extends Phaser.Scene {
 
     update() {
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            mouse = false;
             this.easyMode();
         }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+            mouse = false;
             this.hardMode();
         }
     }
