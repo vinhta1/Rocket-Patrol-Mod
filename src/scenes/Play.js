@@ -130,6 +130,17 @@ class Play extends Phaser.Scene {
                 {
                     mouse = true;
                 }, this);
+
+        //yoinked from CleanPop https://github.com/nathanaltice/CleanPop/blob/master/src/main.js
+        // yoinked from https://gist.github.com/thosakwe/bade2c36c81f41b4a17e6482797dd598, adding sounds into a group
+
+        this.explodeGroup = [];
+
+        this.explodeGroup.push(this.sound.add("sfx_explosion01"));
+        this.explodeGroup.push(this.sound.add("sfx_explosion02"));
+        this.explodeGroup.push(this.sound.add("sfx_explosion03"));
+        this.explodeGroup.push(this.sound.add("sfx_explosion04"));
+        this.explodeGroup.push(this.sound.add("sfx_explosion05"));
     }
 
     update() {
@@ -214,6 +225,12 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play("sfx_explosion"); // sound in scene, play once
+        // yoinked from https://gist.github.com/thosakwe/bade2c36c81f41b4a17e6482797dd598
+        // randomize sound in scene, play once
+        this.index = Math.floor(Math.random() * this.explodeGroup.length);
+        this.explodeSound = this.explodeGroup[this.index];
+        // console.log(this.index); //for debugging
+        this.explodeSound.play();
+
     }
 }
