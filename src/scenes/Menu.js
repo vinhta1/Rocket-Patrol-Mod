@@ -9,16 +9,17 @@ class Menu extends Phaser.Scene {
         this.load.audio("sfx_explosion", "./assets/audio/explosion38.wav");
         this.load.audio("sfx_rocket", "./assets/audio/rocket_shot.wav");
         this.load.audio("music_main01", "./assets/audio/RocketPatrol.wav");
+        this.load.image("title", "./assets/images/title.png");
     }
 
     create() {
         // menu text configuration
         let menuConfig = {
-            fontFamily: "Courier",
-            fontSize: "28px",
+            fontFamily: "Consolas",
+            fontSize: "56px",
             backgroundColor: "#F3B141",
             color: "#843605",
-            align: "right",
+            align: "center",
             padding: {
                 top: 5,
                 bottom: 5,
@@ -26,13 +27,39 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
 
+        let controlConfig = {
+            fontFamily: "Consolas",
+            fontSize: "28px",
+            backgroundColor: "#F3B141",
+            color: "#843605",
+            align: "center",
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: game.config.width/2 - borderUISize,
+            wordWrap: {
+                width: game.config.width/2 - borderUISize,
+                useAdvancedWrap: true //https://www.html5gamedevs.com/topic/38250-word-wrap-in-phaser-3/
+            }
+        }
+
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, "ROCKET PATROL", menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, "Use ←→ arrows to move and (F) to fire", menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, borderUISize + borderPadding, "ROCKET PATROL", menuConfig).setAlpha(.9).setOrigin(0.5);
+        this.add.text(borderUISize - borderPadding, game.config.height/2 - borderUISize, "Keyboard Controls:\n\n← → to move\n(F) to fire", controlConfig).setAlpha(.9);
+        this.add.text(game.config.width/2 + borderPadding, game.config.height/2 - borderUISize, "Mouse Controls:\n\nCursor to move\n(Left Click) to fire", controlConfig).setAlpha(.9);
+        menuConfig.fontSize = "28px",
         menuConfig.backgroundColor = "#00FF00";
         menuConfig.color = "#000";
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, "Press ← for Novice or → for Expert", menuConfig).setOrigin(0.5);
-    
+        menuConfig.wordWrap = {
+            width: game.config.width-borderUISize * 2,
+            useAdvancedWrap: true
+        };
+        menuConfig.align = "center";
+        this.add.text(game.config.width/2, game.config.height - borderUISize * 2 - borderPadding, "Press ← or left click for Novice\nPress → or right click for Expert", menuConfig).setAlpha(.9).setOrigin(0.5);
+        
+        this.title = this.add.sprite(0, 0, "title").setOrigin(0, 0).setDepth(-1);
+
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);

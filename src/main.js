@@ -10,6 +10,7 @@
 // 2)   Use Phaser's particle emitter to create a particle explosion when the rocket hits the spaceship (5)
 // 3)   Implement the speed increase that happens after 30 seconds in the original game (1)
 // 4)   Implement mouse control for player movement and mouse click to fire (5)
+// 5)   Create a new title screen (e.g., new artwork, typography, layout) (3)
 
 let config = {
     type: Phaser.AUTO,
