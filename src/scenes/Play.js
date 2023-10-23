@@ -51,7 +51,7 @@ class Play extends Phaser.Scene {
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, "spaceship", 0, 20).setOrigin(0,0); //middle ship
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, "spaceship", 0, 10).setOrigin(0, 0); //bottom ship
 
-        //halftime speed up
+        // halftime speed up
         this.clockHalf = this.time.delayedCall(game.settings.gameTimer/2, () => {
             this.ship01.moveSpeed += 2;
             this.ship02.moveSpeed += 2;
@@ -94,14 +94,14 @@ class Play extends Phaser.Scene {
             this.p1Rocket.body.setVelocity(0,0);
         }, null, this);
 
-        //adding timer
+        // adding timer
         this.timeRight = this.add.text(game.config.width - borderUISize - borderPadding, borderUISize + borderPadding * 2, 0, scoreConfig).setOrigin(1,0);
         
 
         // GAME OVER flag
         this.gameOver = false;
 
-        //adding music
+        // adding music
         this.music01 = this.sound.add("music_main01",{volume:0.4}); //add. note: let didn't work, because the scope didn't reach update()
         this.music01.setLoop(true); //loop
         this.music01.play(); //play
@@ -132,7 +132,7 @@ class Play extends Phaser.Scene {
                     mouse = true;
                 }, this);
 
-        //yoinked from CleanPop https://github.com/nathanaltice/CleanPop/blob/master/src/main.js
+        // yoinked from CleanPop https://github.com/nathanaltice/CleanPop/blob/master/src/main.js
         // yoinked from https://gist.github.com/thosakwe/bade2c36c81f41b4a17e6482797dd598, adding sounds into a group
 
         this.explodeGroup = [];
@@ -199,8 +199,8 @@ class Play extends Phaser.Scene {
             this.add.particles(this.ship01.x,this.ship01.y,"explodeParticle",this.particleConfig);
         }
 
-        //updating timer, yoinked from https://labs.phaser.io/edit.html?src=src/time\timer%20event.js
-        //https://newdocs.phaser.io/docs/3.55.2/Phaser.Time.TimerEvent#elapsed
+        // updating timer, yoinked from https://labs.phaser.io/edit.html?src=src/time\timer%20event.js
+        // https://newdocs.phaser.io/docs/3.55.2/Phaser.Time.TimerEvent#elapsed
         this.timeRight.setText(`${Math.round(((game.settings.gameTimer - this.clock.elapsed) / 1000)).toString()}`); 
     }
 

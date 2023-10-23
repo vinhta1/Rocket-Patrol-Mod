@@ -1,9 +1,17 @@
-// your first/last name
-// mod title (e.g. Rocket Patrol Reloaded IV: The Rocketing)
-// the approximate time it took to complete the project (in hours)
-// the mods you chose from the list above, their point values, and, if necessary, an explanation of their implementation
+// Vinh Ta
+// Rocket Patrol V: Rocket Harder
+// 12-18 hours? I spent six today, and worked on at least 3 seperate days.
+
 // citations for any sources you used (you do not need to cite Nathan or Phaser documentation)
-//  How to add physics to a constructor: https://stackoverflow.com/questions/55302007/how-add-physics-to-phaser-3-sprite
+// How to add physics to a constructor: https://stackoverflow.com/questions/55302007/how-add-physics-to-phaser-3-sprite
+// How to load paths: https://github.com/nathanaltice/CleanPop/blob/master/src/main.js
+// How to wrap text: //https://www.html5gamedevs.com/topic/38250-word-wrap-in-phaser-3/
+// Mouse down events: // https://labs.phaser.io/edit.html?src=src/input/mouse/mouse%20down.js&v=3.60.0
+// How to use arrays to randomize sound and then play said sounds:
+// https://gist.github.com/thosakwe/bade2c36c81f41b4a17e6482797dd598
+// Working with delayedCall and time: https://labs.phaser.io/edit.html?src=src/time\timer%20event.js
+// https://newdocs.phaser.io/docs/3.55.2/Phaser.Time.TimerEvent#elapsed
+
 
 // 1)    Add your own (copyright-free) looping background music to the Play scene
 //      (keep the volume low and be sure that multiple instances of your music don't play when the game restarts) (1)
