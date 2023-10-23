@@ -80,15 +80,11 @@ class Play extends Phaser.Scene {
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 100
+            fixedWidth: 100,
+            zeroPad: 0
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
-
-        // GAME OVER flag
-        this.gameOver = false;
-
         
-
         // 60 or 45-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
@@ -98,7 +94,12 @@ class Play extends Phaser.Scene {
             this.p1Rocket.body.setVelocity(0,0);
         }, null, this);
 
+        //adding timer
+        this.timeRight = this.add.text(game.config.width - borderUISize - borderPadding, borderUISize + borderPadding * 2, 0, scoreConfig).setOrigin(1,0);
         
+
+        // GAME OVER flag
+        this.gameOver = false;
 
         //adding music
         this.music01 = this.sound.add("music_main01",{volume:0.4}); //add. note: let didn't work, because the scope didn't reach update()
@@ -197,7 +198,13 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship01);
             this.add.particles(this.ship01.x,this.ship01.y,"explodeParticle",this.particleConfig);
         }
+
+        //updating timer, yoinked from https://labs.phaser.io/edit.html?src=src/time\timer%20event.js
+        //https://newdocs.phaser.io/docs/3.55.2/Phaser.Time.TimerEvent#elapsed
+        this.timeRight.setText(`${Math.round(((game.settings.gameTimer - this.clock.elapsed) / 1000)).toString()}`); 
     }
+
+
 
     checkCollision(rocket, ship) {
         // simple AABB checking
